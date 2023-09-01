@@ -23,7 +23,7 @@
             <a class="Contato" href="contato.html">Contato</a>
         </div>
 
-        <div id="sound_button" onClick="playpause()" ><img title='Music Playing' alt='Play The Music' src='sound-on.png'/></div>
+        <div id="sound_button" onClick="justPlay()" ><img title='Music Playing' alt='Play The Music' src='sound-off.png'/></div>
     </div>
 
     <main>
@@ -51,17 +51,33 @@
         <img class="MãoRobô" src="robot-hand-finger-pointing-ai-technology-backgrou-2022-09-16-09-23-42-utc 1.png" width="100">
     </main>
 
+    <audio width="0" height="0" id="sound" src="https://github.com/CarolinaLuna-lab/bootcamp/blob/main/soundtrack.mp3?raw=true" type="audio/mp3"></audio>
+
     <script type="text/javascript">
-        function playpause() { var snd = document.getElementById("sound");
+        let songIsPlaying = false;
+        let sound = document.getElementById("sound");
         var snd_btn = document.getElementById("sound_button");
-        snd.muted = !snd.muted;
-        
-        if(snd.muted){ snd_btn.innerHTML = "<img alt='Pause The Music' title='Music Paused' src='sound-off.png' />"; }
-            else{ snd_btn.innerHTML = "<img alt='Play The Music' title='Music Playing' src='sound-on.png' />"; }
+
+        function playSong() {
+            sound.play();
+            songIsPlaying = true;
+            snd_btn.innerHTML = "<img alt='Pause The Music' title='Music Paused' src='sound-on.png' />"
+        }
+
+        function pauseSong() {
+            sound.pause();
+            songIsPlaying = false;
+            snd_btn.innerHTML = "<img alt='Play The Music' title='Music Playing' src='sound-off.png' />"
+        }
+
+        function justPlay() {
+            if (songIsPlaying == false) {
+                playSong();
+            } else{
+                pauseSong();
+            }
         }
     </script>
-    
-    <audio autoplay="true" loop="true" width="0" height="0" id="sound" src="https://github.com/CarolinaLuna-lab/bootcamp/blob/main/soundtrack.mp3?raw=true" type="audio/mp3" ></audio>
 </body>
 
 </html>
